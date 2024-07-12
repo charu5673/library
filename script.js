@@ -12,24 +12,11 @@ const p=document.querySelector("#pages");
 const r=document.querySelector("#read");
 const cards=document.querySelector(".cards");
 const add=document.querySelector("#add");
+
 add.addEventListener("click",function(e){addBookToLibrary(e)});
 function addBookToLibrary(e) {
-    if(t.value==null||t.value==""||a.value==null||a.value==""||p.value==null||p.value=="")
-        {
-            e.preventDefault();
-            return;
-        }
-        for(i=0;i<myLibrary.length;i++)
-            {
-                if(myLibrary[i].title===t.value)
-                    {
-                        if(myLibrary[i].author===a.value)
-                            {
-                                e.preventDefault();
-                                return;
-                            }
-                    }
-            }
+    if(t.validity.valid&&a.validity.valid&&p.validity.valid)
+    {
     const b=new Book(t.value,a.value,p.value,r.checked);
     myLibrary.push(b);
     e.preventDefault();
@@ -38,6 +25,7 @@ function addBookToLibrary(e) {
     p.value=null;
     r.checked=false;
     display();
+    }
 }
 
 function remove(t,a){
